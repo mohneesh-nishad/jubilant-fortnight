@@ -1,0 +1,42 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+"""
+recipe
+"""
+type Product {
+  id: ID!
+  title: String @upper
+  description: String
+  recipe: Recipe
+  creationDate: DateTime!
+  # ingredients: [String!]!
+}
+
+"""
+Date custom scalar type
+"""
+scalar DateTime
+
+type Query {
+  product(id: String!): Product!
+  products(skip: Int = 0, take: Int = 25): [Product!]!
+}
+
+type Mutation {
+  addProduct(newProductData: NewProductInput!): Product!
+  removeProduct(id: String!): Boolean!
+}
+
+input NewProductInput {
+  title: String!
+  description: String
+  recipeId: ID
+}
+
+type Subscription {
+  productAdded: Product!
+}
