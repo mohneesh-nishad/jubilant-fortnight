@@ -7,11 +7,11 @@ import { diskStorage } from 'multer';
 import { editFileName } from 'src/common/utils/file-upload-util';
 import { DeleteObject } from './dto/deleteObject.dto';
 
-@Controller('fileupload')
+@Controller('filestorage')
 export class UploadController {
   constructor(private readonly uploadService: UploadService) { }
 
-  @Post()
+  @Post('/upload-single-file')
   @UseInterceptors(FastifyFileInterceptor('file', {
     storage: diskStorage({
       destination: './upload/single',
@@ -35,7 +35,7 @@ export class UploadController {
   @Post('/delete-file')
   async deleteS3Object(@Req() req: FastifyRequest, @Res() res: FastifyReply, @Body() deleteObject: DeleteObject) {
     try {
-      const del_Obj = await this.uploadService._deleteHandler(req, deleteObject.filename)
+      const del_Obj = await this.uploadService._deleteHandler(deleteObject.filename)
       if (!del_Obj) {
         return res.status(200).send('There was an error deleting file')
       }

@@ -13,7 +13,7 @@ import { ProductsModule } from './products/products.module';
 import { RecipesModule } from './recipes/recipes.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UploadModule } from './fileUpload/upload.module';
+import { UploadModule } from './file-storage/upload.module';
 import configuration from './config/configuration';
 
 

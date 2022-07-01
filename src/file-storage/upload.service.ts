@@ -36,15 +36,24 @@ export class UploadService {
         })
     }
 
-    _deleteHandler(req, key: string) {
-        return new Promise((res, rej) => {
-            this.s3.deleteObject({ Bucket: this.bucket, Key: key }, function (err, data) {
-                if (err) { rej(err) }
-                if (data) { res(data) }
-                rej('something terrible happened')
-            })
-
-        })
+    async _deleteHandler(key: string) {
+        const params = { Bucket: this.bucket, Key: key }
+        try {
+            await this.s3.headObject(params).promise()
+            console.log("File Found in S3")
+            try {
+                await this.s3.deleteObject(params).promise()
+                console.log("file deleted Successfully")
+                return 'File deleted Successfully';
+            }
+            catch (err) {
+                console.log("ERROR in file Deleting : " + JSON.stringify(err))
+                throw new Error(err)
+            }
+        } catch (err) {
+            console.log("File not Found ERROR : " + err.code)
+            throw new Error(err)
+        }
     }
 
     _uploadHandler(@Req() req, file: Express.Multer.File, cb: (error: Error | null, info?: any) => void) {
