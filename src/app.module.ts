@@ -1,4 +1,5 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { DirectiveLocation, GraphQLDirective } from 'graphql';
@@ -12,6 +13,8 @@ import { ProductsModule } from './products/products.module';
 import { RecipesModule } from './recipes/recipes.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UploadModule } from './fileUpload/upload.module';
+import configuration from './config/configuration';
 
 
 
@@ -21,6 +24,7 @@ import { AppService } from './app.service';
   imports: [
     RecipesModule,
     ProductsModule,
+    UploadModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       // autoSchemaFile: 'schema.gql',
@@ -40,6 +44,9 @@ import { AppService } from './app.service';
         ],
       },
       csrfPrevention: true
+    }),
+    ConfigModule.forRoot({
+      load: [configuration],
     }),
   ],
 })
