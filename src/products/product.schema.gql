@@ -12,7 +12,7 @@ type Product {
   title: String @upper
   description: String
   recipe: Recipe
-  creationDate: DateTime!
+  creationDate: DateTime! @deprecated(reason: "Use new field `created_at`.")
   # ingredients: [String!]!
 }
 

@@ -1,5 +1,5 @@
 import { NotFoundException } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
+import { Args, Directive, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 import { NewProductInput } from './dto/new-product.input';
 import { ProductsArgs } from './dto/products.args';
@@ -23,8 +23,9 @@ export class ProductsResolver {
     return product;
   }
 
+  @Directive('@deprecated(reason: "This query will be removed in next update.")')
   @Query((returns) => [Product])
-  products(@Args() productsArgs: ProductsArgs): Promise<Product[]> {
+  async products(@Args() productsArgs: ProductsArgs): Promise<Product[]> {
     return this.productService.findAll(productsArgs);
   }
 

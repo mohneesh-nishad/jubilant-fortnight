@@ -38,10 +38,11 @@ async function bootstrap() {
   SwaggerModule.setup(
     'api',
     app,
-    SwaggerModule.createDocument(app, swaggerDocument, swagger_options, customOptions),
+    SwaggerModule.createDocument(app, swaggerDocument, swagger_options),
   );
 
-  app.listen(3000).then(async (server) => {
+  const port = 6342
+  app.listen(port).then(async (server) => {
     console.log(`Application is running on: ${await app.getUrl()}/graphql`);
   });
 }

@@ -15,7 +15,9 @@ export class Product {
   @Field((type) => Recipe)
   recipe?: Recipe
 
-  @Field()
+  @Field({
+    deprecationReason:'This will be removed in DB initialization.'
+  })
   creationDate: Date;
 
   //   @Field((type) => [String])

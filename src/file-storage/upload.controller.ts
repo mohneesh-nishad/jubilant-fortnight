@@ -33,6 +33,7 @@ export class UploadController {
   }
 
   @Post('/delete-file')
+  
   async deleteS3Object(@Req() req: FastifyRequest, @Res() res: FastifyReply, @Body() deleteObject: DeleteObject) {
     try {
       const del_Obj = await this.uploadService._deleteHandler(deleteObject.filename)

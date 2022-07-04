@@ -1,0 +1,26 @@
+type User {
+  id: ID!
+  username: String
+  email: String
+  avatar: String
+  password: String
+  birthdate: DateTime
+  registered_at: DateTime
+}
+
+type Query {
+  get_user(id: ID!): UserResponse
+  get_users(skip: Int = 0, take: Int = 25): UsersResponse
+}
+
+type UserResponse {
+  payload: User
+  status: Int
+  message: String
+}
+
+type UsersResponse {
+  payload: [User]
+  status: Int
+  message: String
+}
