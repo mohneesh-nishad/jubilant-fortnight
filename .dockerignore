@@ -1,0 +1,8 @@
+.elintrc.js
+.gitignore
+node_modules
+dist
+./upload
+./test
+.gnupg
+.npm

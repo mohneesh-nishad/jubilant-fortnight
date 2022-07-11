@@ -1,0 +1,7 @@
+services:
+  nest-graph:
+    container_name: ground
+    build:
+      context: .
+    ports:
+      - 6342:6342
