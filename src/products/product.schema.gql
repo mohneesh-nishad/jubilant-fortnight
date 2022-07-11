@@ -5,7 +5,7 @@
 directive @upper on FIELD_DEFINITION
 
 """
-recipe
+Recipe
 """
 type Product {
   id: ID!
