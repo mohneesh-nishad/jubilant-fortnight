@@ -42,8 +42,12 @@ async function bootstrap() {
   );
 
   const port = 6342
-  app.listen(port).then(async (server) => {
-    console.log(`Application is running on: ${await app.getUrl()}/graphql`);
+  app.listen(port, '0.0.0.0', function (error, address) {
+    if(error){
+      console.log(error);
+      process.exit(1);
+    }
+    console.log(`Application is running on: ${address}/graphql`);
   });
 }
 bootstrap();
